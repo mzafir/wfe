@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <h1> Compute Statistics </h1>
+    <h1> Memory Utilization </h1>
     <meta charset="utf-8">
     <title>Interrupts</title>
     <style> /* set the CSS */
@@ -18,23 +18,23 @@
 </head>
 <body>
 <div id="one">
-    <h3>Interrupts</h3>
+    <h3>Free Memory</h3>
     <svg></svg>
 </div>
 <div id="two">
-    <h3>System</h3>
+    <h3>Shared Memory</h3>
     <svg></svg>
 </div>
 <div id="three">
-    <h3>user</h3>
+    <h3>Cached Memory</h3>
     <svg></svg>
 </div>
 <div id="four">
-    <h3>iowait</h3>
+    <h3>Available Memory</h3>
     <svg></svg>
 </div>
 <div id="five">
-    <h3>ctx_switches</h3>
+    <h3>Percent Memory Utilized </h3>
     <svg></svg>
 </div>
 <!-- load the d3.js library -->
@@ -42,7 +42,7 @@
 <script>
 
     // Get the data
-    d3.json("cpugetter.json", function(error, data) {
+    d3.json("memgetter.json", function(error, data) {
         if (error) throw error;
         // trigger render
         draw(data);
@@ -50,7 +50,7 @@
         draw2(data);
         draw3(data);
         draw4(data);
-   //     draw5(data);
+        draw5(data);
     });
 
     function draw(data) {
@@ -58,7 +58,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['interrupts'],
+                interrupt: item['free'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -99,7 +99,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("Interrupt");
+            .text("Free Memory");
 
         g.append("path")
             .datum(array)
@@ -116,7 +116,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['system'],
+                interrupt: item['shared'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -157,7 +157,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("system");
+            .text("Shared Memory");
 
         g.append("path")
             .datum(array)
@@ -174,7 +174,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['soft_interrupts'],
+                interrupt: item['shared'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -215,7 +215,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("soft_interrupts");
+            .text("Shared Memory");
 
         g.append("path")
             .datum(array)
@@ -233,7 +233,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['ctx_switches'],
+                interrupt: item['available'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -274,7 +274,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("ctx_switches");
+            .text("Available_Memory");
 
         g.append("path")
             .datum(array)
@@ -291,7 +291,7 @@
         for (let i = 0; i < data.length; i++) {
             let item = data[i];
             let object = {
-                interrupt: item['idle'],
+                interrupt: item['percent'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -340,7 +340,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("idle");
+            .text("Percent Memory Utilized ");
 
         g.append("path")
             .datum(array)

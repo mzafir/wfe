@@ -17,11 +17,11 @@
 </head>
 <body>
 <div id="one">
-    <h3>buffer</h3>
+    <h3>buffered Mem</h3>
     <svg></svg>
 </div>
 <div id="two">
-    <h3>active</h3>
+    <h3>Cached</h3>
     <svg></svg>
 </div>
 <div id="three">
@@ -33,7 +33,7 @@
     <svg></svg>
 </div>
 <div id="five">
-    <h3>ctx_switches</h3>
+    <h3>Total Memory</h3>
     <svg></svg>
 </div>
 <!-- load the d3.js library -->
@@ -53,16 +53,17 @@
     });
 
     function draw(data) {
-        let array = [];
+        let array_buffer = [];
         for(let i=0; i<data.length; i++){
             let item = data[i];
+            //data.buffers=+data.buffers;
             let object = {
-                interrupt: item['buffers'],
+                buffers: item['buffers'],
                 sample: i//item['sample']
             };
-            array.push(object);
+            array_buffer.push(object);
         }
-        console.log(array);
+        console.log(array_buffer);
 
         const svgWidth = 600, svgHeight = 400;
         const margin = {top: 20, right: 20, bottom: 30, left: 50};
@@ -78,11 +79,11 @@
         const x = d3.scaleLinear().rangeRound([0, width]);
         const y = d3.scaleLinear().rangeRound([height, 0]);
 
-        let line = d3.line()
+        let line_buffer= d3.line()
             .x(function(d) { return x(d.sample)})
-            .y(function(d) { return y(d.interrupt)});
-        x.domain(d3.extent(array, function(d) { return d.sample }));
-        y.domain(d3.extent(array, function(d) { return d.interrupt }));
+            .y(function(d) { return y(d.buffer)});
+        x.domain(d3.extent(array_buffer, function(d) { return d.sample }));
+        y.domain(d3.extent(array_buffer, function(d) { return d.buffer }));
 
         g.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -98,16 +99,16 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("Interrupt");
+            .text("buffered Memory");
 
         g.append("path")
-            .datum(array)
+            .datum(array_buffer)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", line);
+            .attr("d", line_buffer);
     }
 
     function draw1(data) {
@@ -115,7 +116,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['active'],
+                percent: item['free'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -136,11 +137,11 @@
         const x = d3.scaleLinear().rangeRound([0, width]);
         const y = d3.scaleLinear().rangeRound([height, 0]);
 
-        let line = d3.line()
+        let line_percent = d3.line()
             .x(function(d) { return x(d.sample)})
-            .y(function(d) { return y(d.interrupt)});
+            .y(function(d) { return y(d.percent)});
         x.domain(d3.extent(array, function(d) { return d.sample }));
-        y.domain(d3.extent(array, function(d) { return d.interrupt }));
+        y.domain(d3.extent(array, function(d) { return d.percent }));
 
         g.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -156,7 +157,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("system");
+            .text("Free Memory");
 
         g.append("path")
             .datum(array)
@@ -165,7 +166,7 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", line);
+            .attr("d", line_percent);
     }
 
     function draw2(data) {
@@ -173,7 +174,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['total'],
+                interrupt: item['cached'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -214,7 +215,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("user");
+            .text("cached_memory");
 
         g.append("path")
             .datum(array)
@@ -232,7 +233,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['free'],
+                interrupt: item['available'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -255,9 +256,9 @@
 
         let line = d3.line()
             .x(function(d) { return x(d.sample)})
-            .y(function(d) { return y(d.interrupt)});
+            .y(function(d) { return y(d.free)});
         x.domain(d3.extent(array, function(d) { return d.sample }));
-        y.domain(d3.extent(array, function(d) { return d.interrupt }));
+        y.domain(d3.extent(array, function(d) { return d.free }));
 
         g.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -273,7 +274,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("iowait");
+            .text("available_memory");
 
         g.append("path")
             .datum(array)
@@ -290,7 +291,7 @@
         for (let i = 0; i < data.length; i++) {
             let item = data[i];
             let object = {
-                interrupt: item['used'],
+                interrupt: item['total'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -316,13 +317,13 @@
                 return x(d.sample)
             })
             .y(function (d) {
-                return y(d.interrupt)
+                return y(d.buffer)
             });
         x.domain(d3.extent(array, function (d) {
             return d.sample
         }));
         y.domain(d3.extent(array, function (d) {
-            return d.interrupt
+            return d.buffer
         }));
 
         g.append("g")
@@ -339,7 +340,7 @@
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("ctx_switches");
+            .text("total_memory");
 
         g.append("path")
             .datum(array)
