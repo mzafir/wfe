@@ -17,12 +17,12 @@
 </head>
 <body>
 <div id="one">
-<h3>Interrupts</h3>
-<svg></svg>
+    <h3>Interrupts</h3>
+    <svg></svg>
 </div>
 <div id="two">
-<h3>System</h3>
-<svg></svg>
+    <h3>System</h3>
+    <svg></svg>
 </div>
 <div id="three">
     <h3>user</h3>
@@ -41,7 +41,7 @@
 <script>
 
     // Get the data
-    d3.json("day2.json", function(error, data) {
+    d3.json("cpugetter.json", function(error, data) {
         if (error) throw error;
         // trigger render
         draw(data);
@@ -57,7 +57,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['time_since_update'],
+                interrupt: item['interrupt'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -73,8 +73,8 @@
             .attr("height", svgHeight);
 
         const g = svg.append("g").attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")"
-            );
+            "translate(" + margin.left + "," + margin.top + ")"
+        );
         const x = d3.scaleLinear().rangeRound([0, width]);
         const y = d3.scaleLinear().rangeRound([height, 0]);
 
@@ -115,7 +115,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['rx'],
+                interrupt: item['iowait'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -173,7 +173,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['cumulative_cx'],
+                interrupt: item['soft_interrupts'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -232,7 +232,7 @@
         for(let i=0; i<data.length; i++){
             let item = data[i];
             let object = {
-                interrupt: item['cumulative_tx'],
+                interrupt: item['ctx_switches'],
                 sample: i//item['sample']
             };
             array.push(object);
@@ -290,7 +290,7 @@
         for (let i = 0; i < data.length; i++) {
             let item = data[i];
             let object = {
-                interrupt: item['cx'],
+                interrupt: item['idle'],
                 sample: i//item['sample']
             };
             array.push(object);

@@ -1,0 +1,111 @@
+[{
+  "available": 3376304128,
+  "used": 534437888,
+  "cached": 1111470080,
+  "percent": 13.7,
+  "free": 3376304128,
+  "inactive": 382730240,
+  "active": 701435904,
+  "shared": 84258816,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376271360,
+  "used": 534470656,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376271360,
+  "inactive": 382734336,
+  "active": 701452288,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376103424,
+  "used": 534638592,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376103424,
+  "inactive": 382734336,
+  "active": 701538304,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376254976,
+  "used": 534487040,
+  "cached": 1111470080,
+  "percent": 13.7,
+  "free": 3376254976,
+  "inactive": 382730240,
+  "active": 701673472,
+  "shared": 84258816,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376156672,
+  "used": 534585344,
+  "cached": 1111470080,
+  "percent": 13.7,
+  "free": 3376156672,
+  "inactive": 382730240,
+  "active": 701538304,
+  "shared": 84258816,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376205824,
+  "used": 534536192,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376205824,
+  "inactive": 382734336,
+  "active": 701513728,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376226304,
+  "used": 534515712,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376226304,
+  "inactive": 382734336,
+  "active": 701513728,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376136192,
+  "used": 534605824,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376136192,
+  "inactive": 382734336,
+  "active": 701489152,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376119808,
+  "used": 534622208,
+  "cached": 1111482368,
+  "percent": 13.7,
+  "free": 3376119808,
+  "inactive": 382734336,
+  "active": 701550592,
+  "shared": 84271104,
+  "total": 3910742016,
+  "buffers": 2662400
+}, {
+  "available": 3376128000,
+  "used": 534614016,
+  "cached": 1111470080,
+  "percent": 13.7,
+  "free": 3376128000,
+  "inactive": 382730240,
+  "active": 701583360,
+  "shared": 84258816,
+  "total": 3910742016,
+  "buffers": 2662400
+}]
